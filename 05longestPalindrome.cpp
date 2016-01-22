@@ -1,62 +1,41 @@
 #include <iostream>
 
 using namespace std;
-//判断是不是回文串
-bool IsPalindrome(string str, int left, int right)
-{
-    while(left <= right)
-    {
-        if(str[left] == str[right])
-        {
-            left++;
-            right--;
-        }
-        else
-            return false;
-    }
-    return true;
-}
-int maxlen;
-string s;
-string longestPalindrome(string str, int left, int right)
-{
 
-    if( IsPalindrome(str, left, right) )
-    {
-        maxlen = right - left + 1;
-        s = str.substr(left, right-left+1);
-    }
-    else
-    {
+// In this method we extend the string
+// from the center place.
 
-        string leftlen = longestPalindrome(str, left+1, right);
-        string rightlen = longestPalindrome(str, left, right-1);
-        s = leftlen.size() > rightlen.size() ? leftlen : rightlen;
+string extendPalindrome(string str, int l, int r)
+{
+    while (l >= 0 && r < str.size() && str[l] == str[r])
+    {
+        l--;
+        r++;
     }
-    return s;
+    return str.substr(l+1, r-l-1);
 }
 
-int longestPalindrome_02(string str, int left, int right)
+string longestPalindrome(string str)
 {
-
-    if( IsPalindrome(str, left, right) )
+    string maxstr;
+    if (str.size() < 2)
     {
-        maxlen = right - left + 1;
+        return str;
     }
-    else
+    for(size_t i = 0; i < str.size() -1; i++)
     {
-
-        int leftlen = longestPalindrome_02(str, left+1, right);
-        int rightlen = longestPalindrome_02(str, left, right-1);
-        maxlen = max(leftlen, rightlen);
+        string left = extendPalindrome(str, i, i);
+        string right = extendPalindrome(str, i, i+1);
+        left = left.size()> right.size() ? left : right;
+        maxstr = left.size()>maxstr.size() ? left : maxstr;
     }
-    return maxlen;
+    return maxstr;
 }
 
 int main()
 {
-    string s = "niniin";
-    cout << IsPalindrome(s, 0, s.size()-1) << endl;
-    cout << longestPalindrome_02(s, 0, s.size()-1);
-    return 0;
+    string str = "a";
+    cout<<IsPalindrome(str);
+    //cout<<longestPalindrome(str);
+
 }
