@@ -7,4 +7,4 @@
 6. Convert
 7.  Reverse Integer
 8. String to Integer (atoi)
-9. Palindrome Number
+9. palindrome Number
