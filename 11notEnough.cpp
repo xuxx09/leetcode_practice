@@ -1,6 +1,7 @@
 #include <iostream>
 
 using namespace std;
+//以x轴为中心，考虑问题，可以获得更加明确的信息
 int maxArea_01(vector<int>& height) {
     int water = 0;
     int i = 0, j = height.size() - 1;
