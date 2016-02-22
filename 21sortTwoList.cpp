@@ -89,6 +89,23 @@ public:
         Tail->next = l1 ? l1 : l2;
         return Head.next;
     }
+
+    //使用递归来解决这个问题，让编程变得容易。
+    ListNode *mergeTwoLists2(ListNode *l1, ListNode *l2)
+    {
+        if(l1 == NULL) return l2;
+        if(l2 == NULL) return l1;
+        if(l1->val > l2->val)
+        {
+            l2->next = mergeTwoLists2(l1, l2->next);
+            return l2;
+        }
+        else
+        {
+            l1->next = mergeTwoLists2(l1->next, l2);
+            return l1;
+        }
+    }
 };
 int main()
 {
