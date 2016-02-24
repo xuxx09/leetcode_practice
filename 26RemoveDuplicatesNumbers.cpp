@@ -23,6 +23,19 @@ public:
         }
         return nums.size();
     }
+    //这是一个十分简短的代码，没有进行存储空间的删除，
+    //这样函数处理的速度就会更加快速
+    int removeDuplicates(vector<int>& nums)
+    {
+        int counts=0;
+        int n = nums.size();
+        for(int i = 1; i < n; i++)
+        {
+            if(nums[i] ==  nums[i-1]) counts++;
+            else nums[i-counts] = nums[i];
+        }
+        return n-counts;
+    }
 };
 int main()
 {
